@@ -1,281 +1,498 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Universo do Eduardo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: 'Arial', sans-serif;
+<title>Biografia de Eduardo</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:
+    linear-gradient(
+    to bottom,
+    #000000,
+    #020617,
+    #04152d,
+    #072a52,
+    #0b3d91
+    );
+    color:white;
+    overflow-x:hidden;
+}
+
+/* Tela de abertura */
+
+#welcome-screen{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    animation:fadeOut 3s forwards;
+    animation-delay:2.5s;
+}
+
+#welcome-screen h1{
+    font-size:4rem;
+    text-align:center;
+    text-shadow:0 0 30px #4da6ff;
+}
+
+@keyframes fadeOut{
+    to{
+        opacity:0;
+        visibility:hidden;
     }
+}
 
-    body{
-      background: radial-gradient(circle at bottom, #0b1026 0%, #050816 60%, #000 100%);
-      color:white;
-      overflow-x:hidden;
-      min-height:100vh;
-      position:relative;
-    }
+/* Logo */
 
-    /* ESTRELAS */
-    .stars{
-      position:fixed;
-      width:100%;
-      height:100%;
-      background:
-      transparent url("https://www.transparenttextures.com/patterns/stardust.png");
-      animation: moveStars 120s linear infinite;
-      z-index:-5;
-      opacity:0.8;
-    }
+.logo{
+    position:fixed;
+    top:20px;
+    left:20px;
+    z-index:1000;
+    font-size:1rem;
+    font-weight:bold;
+    color:#9ecfff;
+    text-shadow:0 0 10px #4da6ff;
+}
 
-    @keyframes moveStars{
-      from{
+/* Hero */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero h1{
+    font-size:6rem;
+    background:linear-gradient(
+    90deg,
+    #ffffff,
+    #9ecfff,
+    #4da6ff
+    );
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    margin-top:20px;
+    font-size:1.2rem;
+}
+
+/* Menu central */
+
+.menu-center{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.menu-center a{
+    text-decoration:none;
+    color:white;
+    padding:12px 25px;
+    border-radius:30px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.1);
+    transition:.4s;
+    backdrop-filter:blur(10px);
+}
+
+.menu-center a:hover{
+    background:#0b3d91;
+    transform:translateY(-4px);
+    box-shadow:0 0 20px #4da6ff;
+}
+
+/* Seções */
+
+section{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+    padding:50px 0;
+}
+
+h2{
+    color:#9ecfff;
+    margin-bottom:20px;
+}
+
+.card{
+    background:rgba(8,20,45,.65);
+    border:1px solid rgba(77,166,255,.15);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:30px;
+    margin-top:20px;
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 0 25px rgba(77,166,255,.25);
+}
+
+.card p,
+.card li{
+    line-height:1.8;
+}
+
+.card ul{
+    margin-left:20px;
+}
+
+/* Planetas */
+
+.planet{
+    position:fixed;
+    border-radius:50%;
+    opacity:.3;
+    z-index:-1;
+}
+
+.planet1{
+    width:300px;
+    height:300px;
+    top:10%;
+    right:-80px;
+
+    background:
+    radial-gradient(
+    circle at 30% 30%,
+    #6ca8ff,
+    #133b7a,
+    #05162e
+    );
+
+    animation:floatPlanet 15s infinite ease-in-out;
+}
+
+.planet2{
+    width:220px;
+    height:220px;
+    left:-60px;
+    bottom:10%;
+
+    background:
+    radial-gradient(
+    circle at 30% 30%,
+    #5b7cff,
+    #0b2f63,
+    #020c1f
+    );
+
+    animation:floatPlanet 18s infinite ease-in-out;
+}
+
+@keyframes floatPlanet{
+
+    0%{
         transform:translateY(0);
-      }
-      to{
-        transform:translateY(-2000px);
-      }
     }
 
-    /* BURACO NEGRO */
-    .blackhole{
-      position:fixed;
-      width:350px;
-      height:350px;
-      border-radius:50%;
-      background:black;
-      top:70px;
-      right:-100px;
-      box-shadow:
-      0 0 60px #6a00ff,
-      0 0 120px #2200ff,
-      0 0 180px #00bfff;
-      animation: rotate 15s linear infinite;
-      z-index:-2;
+    50%{
+        transform:translateY(-20px);
     }
 
-    .blackhole::before{
-      content:"";
-      position:absolute;
-      width:430px;
-      height:430px;
-      border-radius:50%;
-      border:12px solid rgba(123, 0, 255, 0.5);
-      top:-40px;
-      left:-40px;
-      filter: blur(5px);
+    100%{
+        transform:translateY(0);
     }
 
-    @keyframes rotate{
-      from{
-        transform:rotate(0deg);
-      }
-      to{
-        transform:rotate(360deg);
-      }
+}
+
+/* Estrelas */
+
+.star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    animation:moveStars linear infinite;
+}
+
+@keyframes moveStars{
+
+    from{
+        transform:translateY(0);
     }
 
-    /* CONSTELAÇÕES */
-    .constellation{
-      position:absolute;
-      width:250px;
-      height:250px;
-      border:1px solid transparent;
+    to{
+        transform:translateY(-120vh);
     }
 
-    .dot{
-      width:6px;
-      height:6px;
-      background:white;
-      border-radius:50%;
-      position:absolute;
-      box-shadow:0 0 10px white;
-    }
+}
 
-    .line{
-      position:absolute;
-      height:2px;
-      background:rgba(255,255,255,0.5);
-      transform-origin:left center;
-    }
+/* Botão topo */
 
-    /* CONTAINER */
-    .container{
-      width:90%;
-      max-width:1100px;
-      margin:auto;
-      padding:40px 0;
-      position:relative;
-      z-index:2;
-    }
+#backToTop{
+    position:fixed;
+    bottom:25px;
+    right:25px;
 
-    header{
-      text-align:center;
-      padding:80px 20px;
-    }
+    width:55px;
+    height:55px;
 
-    header h1{
-      font-size:60px;
-      color:#00d9ff;
-      text-shadow:0 0 20px #00d9ff;
-      margin-bottom:20px;
-    }
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-    header p{
-      font-size:22px;
-      color:#d9d9d9;
-    }
+    border-radius:50%;
+    text-decoration:none;
 
-    /* CARDS */
-    .card{
-      background:rgba(255,255,255,0.08);
-      border:1px solid rgba(255,255,255,0.1);
-      backdrop-filter:blur(10px);
-      border-radius:20px;
-      padding:30px;
-      margin:25px 0;
-      transition:0.4s;
-      box-shadow:0 0 25px rgba(0,0,0,0.5);
-    }
+    background:rgba(11,61,145,.8);
+    color:white;
+    font-size:24px;
 
-    .card:hover{
-      transform:translateY(-5px) scale(1.01);
-      border-color:#00d9ff;
-      box-shadow:0 0 30px rgba(0,217,255,0.5);
-    }
+    box-shadow:0 0 20px rgba(77,166,255,.5);
 
-    .card h2{
-      color:#00d9ff;
-      margin-bottom:15px;
-      font-size:30px;
-    }
+    transition:.4s;
+}
 
-    .card p, li{
-      font-size:19px;
-      line-height:1.8;
-      color:#f0f0f0;
-    }
+#backToTop:hover{
+    transform:translateY(-5px);
+    background:#4da6ff;
+}
 
-    ul{
-      padding-left:20px;
-    }
+footer{
+    text-align:center;
+    padding:40px;
+    color:#bbb;
+}
 
-    /* PLANETAS */
-    .planet{
-      position:absolute;
-      border-radius:50%;
-      opacity:0.8;
-      z-index:-1;
-    }
-
-    .planet1{
-      width:120px;
-      height:120px;
-      background:linear-gradient(45deg,#ff7300,#ffcc00);
-      top:300px;
-      left:-40px;
-      box-shadow:0 0 30px orange;
-    }
-
-    .planet2{
-      width:80px;
-      height:80px;
-      background:linear-gradient(45deg,#00ffcc,#0066ff);
-      bottom:100px;
-      right:30px;
-      box-shadow:0 0 25px cyan;
-    }
-
-    footer{
-      text-align:center;
-      padding:40px;
-      color:#999;
-      font-size:15px;
-    }
-  </style>
+</style>
 </head>
+
 <body>
 
-  <div class="stars"></div>
-  <div class="blackhole"></div>
+<div id="welcome-screen">
+<h1>Bem-vindo à minha biografia</h1>
+</div>
 
-  <!-- PLANETAS -->
-  <div class="planet planet1"></div>
-  <div class="planet planet2"></div>
+<div class="logo">
+🚀 Biografia de Eduardo
+</div>
 
-  <div class="container">
+<div class="planet planet1"></div>
+<div class="planet planet2"></div>
 
-    <header>
-      <h1>🌌 Universo do Eduardo 🌌</h1>
-      <p>
-        Explorando sonhos, hobbies e objetivos através das estrelas.
-      </p>
-    </header>
+<section class="hero">
 
-    <section class="card">
-      <h2>👤 Quem sou eu</h2>
-      <p>
-        Meu nome é Eduardo, tenho 15 anos e sou uma pessoa cheia
-        de energia, sonhos e criatividade. Gosto de aproveitar a vida
-        com positividade e sempre tentar enxergar o lado bom das coisas.
-      </p>
-    </section>
+<div>
 
-    <section class="card">
-      <h2>🎂 Idade e aniversário</h2>
-      <p>
-        Tenho 15 anos e faço aniversário no dia 20 de outubro.
-        Esse dia representa mais um ano da minha jornada e dos meus objetivos.
-      </p>
-    </section>
+<h1>Biografia de Eduardo</h1>
 
-    <section class="card">
-      <h2>🎮 O que eu gosto</h2>
-      <ul>
-        <li>⚽ Fazer esportes</li>
-        <li>🎮 Jogar videogame</li>
-        <li>🎧 Ouvir música</li>
-        <li>🗣️ Conversar com amigos</li>
-      </ul>
-    </section>
+<p>
+Sonhador • Desenvolvedor • Atleta • Futuro Jogador de Futebol Profissional
+</p>
 
-    <section class="card">
-      <h2>⚽ Meus sonhos</h2>
-      <p>
-        Um dos meus maiores sonhos é me tornar jogador de futebol profissional.
-        Também sonho em desenhar ônibus no Rio de Janeiro, algo que mistura
-        criatividade, paixão e imaginação.
-      </p>
-    </section>
+<div class="menu-center">
 
-    <section class="card">
-      <h2>✨ Minhas qualidades</h2>
-      <p>
-        Sou uma pessoa muito positiva na maioria dos momentos
-        e gosto de fazer os outros rirem. Meu jeito engraçado
-        faz parte da minha personalidade.
-      </p>
-    </section>
+<a href="#about">Sobre Mim</a>
+<a href="#skills">Habilidades</a>
+<a href="#hobbies">Passatempos</a>
+<a href="#favorites">Favoritos</a>
+<a href="#dreams">Sonhos</a>
 
-    <section class="card">
-      <h2>🚀 Meu futuro</h2>
-      <p>
-        Quero continuar evoluindo, aprendendo coisas novas e
-        correndo atrás dos meus sonhos. Assim como o universo,
-        acredito que não existem limites para quem tem dedicação.
-      </p>
-    </section>
+</div>
 
-    <footer>
-      🌠 Site espacial criado por Eduardo 🌠
-    </footer>
+</div>
 
-  </div>
+</section>
+
+<section id="about">
+
+<h2>Sobre Mim</h2>
+
+<div class="card">
+
+<p>
+
+Meu nome é Eduardo, tenho 15 anos e sou um garoto cheio de energia e grandes sonhos para o futuro.
+
+Meu aniversário é comemorado no dia 20 de outubro.
+
+Adoro esportes, videogames, ouvir música e conversar com meus amigos.
+
+Sou conhecido por ser uma pessoa positiva e por fazer as pessoas rirem com facilidade.
+
+Gosto de ver outras pessoas sorrindo e por isso estou quase sempre fazendo brincadeiras e piadas.
+
+Também sou apaixonado por programação e desenvolvimento web, possuindo conhecimentos em HTML, CSS e JavaScript.
+
+</p>
+
+</div>
+
+</section>
+
+<section id="skills">
+
+<h2>Habilidades de Programação</h2>
+
+<div class="card">
+
+<h3>HTML</h3>
+
+<p>
+Criação de estruturas modernas e organizadas para sites.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>CSS</h3>
+
+<p>
+Desenvolvimento de estilos avançados, animações e layouts responsivos.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>JavaScript</h3>
+
+<p>
+Criação de funcionalidades dinâmicas e experiências interativas.
+</p>
+
+</div>
+
+</section>
+
+<section id="hobbies">
+
+<h2>Passatempos</h2>
+
+<div class="card">
+
+<ul>
+
+<li>Praticar esportes</li>
+
+<li>Jogar videogame</li>
+
+<li>Ouvir música</li>
+
+<li>Conversar com amigos</li>
+
+<li>Programar</li>
+
+</ul>
+
+</div>
+
+</section>
+
+<section id="favorites">
+
+<h2>Favoritos</h2>
+
+<div class="card">
+
+<p>
+<b>Comida Favorita:</b>
+Strogonoff
+</p>
+
+<p>
+<b>Animal Doméstico Favorito:</b>
+Cachorro
+</p>
+
+<p>
+<b>Animais Selvagens Favoritos:</b>
+Falcão-peregrino e Pantera
+</p>
+
+<p>
+<b>Carro Favorito:</b>
+Koenigsegg One:1
+</p>
+
+</div>
+
+</section>
+
+<section id="dreams">
+
+<h2>Sonhos e Objetivos</h2>
+
+<div class="card">
+
+<p>
+
+Meu sonho é me tornar um jogador de futebol profissional.
+
+Também sonho em desenhar ônibus no Rio de Janeiro.
+
+Pretendo continuar evoluindo minhas habilidades em programação e conquistar grandes objetivos na vida.
+
+Com dedicação, alegria e determinação, busco evoluir cada vez mais.
+
+</p>
+
+</div>
+
+</section>
+
+<a href="#" id="backToTop">⬆</a>
+
+<footer>
+
+© 2026 Biografia de Eduardo
+
+</footer>
+
+<script>
+
+/* Estrelas */
+
+for(let i = 0; i < 300; i++){
+
+const star = document.createElement("div");
+
+star.classList.add("star");
+
+const size = Math.random() * 3;
+
+star.style.width = size + "px";
+star.style.height = size + "px";
+
+star.style.left = Math.random() * 100 + "vw";
+star.style.top = Math.random() * 100 + "vh";
+
+star.style.animationDuration =
+(20 + Math.random() * 40) + "s";
+
+document.body.appendChild(star);
+
+}
+
+</script>
 
 </body>
 </html>
